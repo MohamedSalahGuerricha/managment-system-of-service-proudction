@@ -32,9 +32,8 @@ CREATE TABLE driver (
     customer_name VARCHAR(50),
     first_name VARCHAR(20),
     last_name VARCHAR(20),
-    birthdate DATE,
     phone VARCHAR(20),
-    vichel VARCHAR(20),--=====================================================
+   vehicle_registration VARCHAR(20),
     coment VARCHAR(50),
 	CONSTRAINT fk_driver_customer FOREIGN KEY (customer_name) REFERENCES job(customer)
 	
