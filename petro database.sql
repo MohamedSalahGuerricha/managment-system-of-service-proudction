@@ -12,7 +12,8 @@ CREATE TABLE customer (
     adreess VARCHAR(50),
     NIF VARCHAR(15),
     TIN VARCHAR(15),
-    BP VARCHAR(15)
+    BP VARCHAR(15),
+    INDEX(name)
 );
 -- يتألف من 6  أعمده contact Person هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE contactPerson (
@@ -48,33 +49,35 @@ CREATE TABLE job (
     CONSTRAINT fk_job_customer FOREIGN KEY (customer_name) REFERENCES customer(name)
 );
 -- يتألف ن 5 أعمدة connection هنا قمنا بإنشاء جدول جديد إسمه
-CREATE TABLE connectionThread (
+CREATE TABLE connectionthread (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(15),
     size VARCHAR(5),
     type VARCHAR(5),
     Norm VARCHAR(20),
+    INDEX(name)
 );
 -- يتألف ن 5 أعمدة typEquipment هنا قمنا بإنشاء جدول جديد إسمه
-CREATE TABLE typeEquipment (
-    id INT NOT NULL  AUTO_INCREMENT,
+CREATE TABLE typeequipment (
+    id INT NOT NULL UNIQUE AUTO_INCREMENT,
     name VARCHAR(15) PRIMARY KEY ,
     label2 VARCHAR(5),
-    ConnectionThread VARCHAR(5),
+    Connection_thread VARCHAR(15),
     grad VARCHAR(20),
-    CONSTRAINT fk_typeEquipment_connectionThread FOREIGN KEY (connectionThread) REFERENCES connectionThread(name)
+    -- INDEX(name),
+    CONSTRAINT fk_typeEquipment_connectionThread FOREIGN KEY (connection_thread) REFERENCES connectionthread(name)
 );
 -- يتألف من 6 أعمدة Equipment هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE equipment (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,-- job كمفتاح رئيسي في الجدول id هنا قمنا بتعيين العامود
     job_number VARCHAR(6),
     seriel_number VARCHAR(20),
-    type_element VARCHAR(50),
+    type_equipment VARCHAR(50),
     date_dlivred DATE,
     driver_id INT ,
     -- countries الموجود في الجدول id هو مفتاح ثانوي بالنسبة للعامود country_id يحدد أن العامود fk_country_user هنا قمنا بوضع قيد بإسم
-    CONSTRAINT fk_Equipment_job FOREIGN KEY (job_number) REFERENCES job(job_number)
-    CONSTRAINT fk_Equipment_typElement FOREIGN KEY (type_element) REFERENCES typEquipment(name)
+    CONSTRAINT fk_Equipment_job FOREIGN KEY (job_number) REFERENCES job(job_number),
+    CONSTRAINT fk_Equipment_typElement FOREIGN KEY (type_equipment) REFERENCES typeequipment(name),
     CONSTRAINT fk_Equipment_driver FOREIGN KEY (driver_id) REFERENCES driver(id)
 
 );
@@ -116,14 +119,14 @@ CREATE TABLE priceList (
     cod_service VARCHAR(15),
     name_equipment VARCHAR(15),
     serivce VARCHAR(10),
-    type VARCHAR(10)
+    type VARCHAR(10),
     date_lastupdat DATE,
     responsapl VARCHAR,
     option_price DECIMAL(6,2),
-    unit_price DECIMAL(6,2)
-    contract_price DECIMAL(6,2)
-    CONSTRAINT fk_priceList_customer FOREIGN KEY (customer) REFERENCES customer(20)
-    CONSTRAINT fk_priceList_customer FOREIGN KEY (name_equipment) REFERENCES typEquipment(name)
+    unit_price DECIMAL(6,2),
+    contract_price DECIMAL(6,2),
+    CONSTRAINT fk_priceList_customer FOREIGN KEY (customer) REFERENCES customer(20),
+    CONSTRAINT fk_priceList_customer FOREIGN KEY (name_equipment) REFERENCES typeequipment(name)
 );
 -- يتألف من 9 أعمدة equipmentRqport هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE equipmenRaport (
