@@ -82,7 +82,7 @@ CREATE TABLE equipment (
 
 );
 
--- يتألف من 8 أعمدة serviceEquipment هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 9 أعمدة serviceEquipment هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE serviceEquipment (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_equipment INT,
@@ -95,7 +95,7 @@ CREATE TABLE serviceEquipment (
     price DECIMAL(6,2),
     CONSTRAINT fk_serviceEquipment_equipmmment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
  );
--- يتألف من 6 أعمدة redresService هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 5 أعمدة redresService هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE redresService (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_service INT,
@@ -104,7 +104,7 @@ CREATE TABLE redresService (
     witheBluedUp boolean,
     CONSTRAINT fk_redresService_serviceEquipment FOREIGN KEY (id_service) REFERENCES serviceEquipment(id)
 );
--- يتألف من 6 أعمدة recutService هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 4 أعمدة recutService هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE recutService (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_service INT,
@@ -112,7 +112,7 @@ CREATE TABLE recutService (
     opetion VARCHAR(10),
     CONSTRAINT fk_recutService_serviceEquipment FOREIGN KEY (id_service) REFERENCES serviceEquipment(id)
 );
--- يتألف من 11 أعمدة priceList هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 11 عمود priceList هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE priceList (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     customer VARCHAR(20),
@@ -121,13 +121,13 @@ CREATE TABLE priceList (
     serivce VARCHAR(10),
     type VARCHAR(10),
     date_lastupdat DATE,
-    responsapl VARCHAR,
+    responsapl VARCHAR(10),
     option_price DECIMAL(6,2),
     unit_price DECIMAL(6,2),
     contract_price DECIMAL(6,2),
     
-    CONSTRAINT fk_priceList_customer FOREIGN KEY (customer) REFERENCES customer(20),
-    CONSTRAINT fk_priceList_customer FOREIGN KEY (name_equipment) REFERENCES typeequipment(name)
+    CONSTRAINT fk_priceList_customer FOREIGN KEY (customer) REFERENCES customer(name),
+    CONSTRAINT fk_priceList_typeequipment FOREIGN KEY (name_equipment) REFERENCES typeequipment(name)
 );
 -- يتألف من 9 أعمدة equipmentRqport هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE equipmenRaport (
@@ -139,11 +139,11 @@ CREATE TABLE equipmenRaport (
     condition_connection1 VARCHAR(15),
     condition_connection2 VARCHAR(15),	
     coment VARCHAR(50),
-    raport_number(50),
+    raport_number VARCHAR(50),
     
-    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (connection1) REFERENCES connectionthread(name)
-    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (connection2) REFERENCES connectionthread(name)
-    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (id_equipment) REFERENCES equipment(id)
+    CONSTRAINT fk_EquipmentRaport_connectionthread_1 FOREIGN KEY (connection1) REFERENCES connectionthread(name),
+    CONSTRAINT fk_EquipmentRaport_connectionthread_2 FOREIGN KEY (connection2) REFERENCES connectionthread(name),
+    CONSTRAINT fk_EquipmentRaport_equipment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
 );
 
  
