@@ -125,6 +125,7 @@ CREATE TABLE priceList (
     option_price DECIMAL(6,2),
     unit_price DECIMAL(6,2),
     contract_price DECIMAL(6,2),
+    
     CONSTRAINT fk_priceList_customer FOREIGN KEY (customer) REFERENCES customer(20),
     CONSTRAINT fk_priceList_customer FOREIGN KEY (name_equipment) REFERENCES typeequipment(name)
 );
@@ -139,12 +140,11 @@ CREATE TABLE equipmenRaport (
     condition_connection2 VARCHAR(15),	
     coment VARCHAR(50),
     raport_number(50),
-    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (connection1) REFERENCES connectionThread(name)
-    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (connection2) REFERENCES connectionThread(name)
-    ONSTRAINT fk_EquipmentRaport FOREIGN KEY (id_equipment) REFERENCES equipment(id)
+    
+    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (connection1) REFERENCES connectionthread(name)
+    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (connection2) REFERENCES connectionthread(name)
+    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (id_equipment) REFERENCES equipment(id)
 );
 
  
--- يجب أن تكون موحدة posts الموجود في الجدول url للإشارة إلى أن قيم العامود uidx_posts_url هنا قمنا بوضع قيد إسمه
---CREATE UNIQUE INDEX uidx_posts_url
---ON posts (url); 
+ 
