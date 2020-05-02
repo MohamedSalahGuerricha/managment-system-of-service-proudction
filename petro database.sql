@@ -4,7 +4,7 @@ DROP DATABASE IF EXISTS petrotesting;
 CREATE DATABASE petrotesting;
 -- و بالتالي أي شيء ننشئه سيتم إنشاؤه فيها petrotesting هنا قمنا بتحديد أن أي إستعلام جديد سيتم تنفيذه على قاعدة البيانات
 USE petrotesting;
--- يتألف من 33 أعمده customer هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 7 أعمده customer هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE customer (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(50),
@@ -13,9 +13,8 @@ CREATE TABLE customer (
     NIF VARCHAR(15),
     TIN VARCHAR(15),
     BP VARCHAR(15)
-    
 );
--- يتألف من6  عامودين contact Person هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 6  أعمده contact Person هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE contactPerson (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     customer_name VARCHAR(20),
@@ -25,8 +24,7 @@ CREATE TABLE contactPerson (
     Email VARCHAR(255),
     CONSTRAINT fk_contactPerson_customer FOREIGN KEY (customer_name) REFERENCES customer(name)
 );
-
--- يتألف من 9 أعمدة users هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 7 أعمدة driver هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE driver (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     customer_name VARCHAR(50),
@@ -37,7 +35,6 @@ CREATE TABLE driver (
     coment VARCHAR(50),
     CONSTRAINT fk_driver_customer FOREIGN KEY (customer_name) REFERENCES customer(name)
 );
-
 -- يتألف من 8 أعمده JOB هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE job (
     job_number VARCHAR(6) NOT NULL PRIMARY KEY ,
@@ -47,29 +44,26 @@ CREATE TABLE job (
     date_open DATE,
     following VARCHAR(10),
     date_close DATE,
-	price DECIMAL(6,2),
+    price DECIMAL(6,2),
     CONSTRAINT fk_job_customer FOREIGN KEY (customer_name) REFERENCES customer(name)
 );
--- يتألف ن 8 أعمدة connection هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف ن 5 أعمدة connection هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE connectionThread (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(15),
-	size VARCHAR(5),
-	type VARCHAR(5),
+    size VARCHAR(5),
+    type VARCHAR(5),
     Norm VARCHAR(20),
-
 );
--- يتألف ن 8 أعمدة typEquipment هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف ن 5 أعمدة typEquipment هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE typeEquipment (
     id INT NOT NULL  AUTO_INCREMENT,
     name VARCHAR(15) PRIMARY KEY ,
-	label2 VARCHAR(5),
-	ConnectionThread VARCHAR(5),
+    label2 VARCHAR(5),
+    ConnectionThread VARCHAR(5),
     grad VARCHAR(20),
-	CONSTRAINT fk_typeEquipment_connectionThread FOREIGN KEY (connectionThread) REFERENCES connectionThread(name)
-
+    CONSTRAINT fk_typeEquipment_connectionThread FOREIGN KEY (connectionThread) REFERENCES connectionThread(name)
 );
-
 -- يتألف من 6 أعمدة Equipment هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE equipment (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,-- job كمفتاح رئيسي في الجدول id هنا قمنا بتعيين العامود
@@ -91,15 +85,13 @@ CREATE TABLE serviceEquipment (
     id_equipment INT,
     name_function VARCHAR(50),
     duration float,
-	operator VARCHAR(10),
-	inspector VARCHAR(10),
-	aid VARCHAR(10),
+    operator VARCHAR(10),
+    inspector VARCHAR(10),
+    aid VARCHAR(10),
     date_operation DATE,
-	price DECIMAL(6,2),
-	
-	CONSTRAINT fk_serviceEquipment_equipmmment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
-    
-);
+    price DECIMAL(6,2),
+    CONSTRAINT fk_serviceEquipment_equipmmment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
+ );
 -- يتألف من 6 أعمدة redresService هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE redresService (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -115,23 +107,38 @@ CREATE TABLE recutService (
     id_service INT,
     type VARCHAR(20),
     opetion VARCHAR(10),
-    
     CONSTRAINT fk_recutService_serviceEquipment FOREIGN KEY (id_service) REFERENCES serviceEquipment(id)
-);-- يتألف من 8 أعمدة serviceEquipment هنا قمنا بإنشاء جدول جديد إسمه
+);
+-- يتألف من 11 أعمدة priceList هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE priceList (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     customer VARCHAR(20),
-	cod_service VARCHAR(15),
+    cod_service VARCHAR(15),
     name_equipment VARCHAR(15),
-	serivce VARCHAR(10),
-	type VARCHAR(10)
+    serivce VARCHAR(10),
+    type VARCHAR(10)
     date_lastupdat DATE,
-	responsapl VARCHAR,
-	option_price DECIMAL(6,2),
-	unit_price DECIMAL(6,2)
-	contract_price DECIMAL(6,2)
-	CONSTRAINT fk_priceList_customer FOREIGN KEY (customer) REFERENCES customer(20)
+    responsapl VARCHAR,
+    option_price DECIMAL(6,2),
+    unit_price DECIMAL(6,2)
+    contract_price DECIMAL(6,2)
+    CONSTRAINT fk_priceList_customer FOREIGN KEY (customer) REFERENCES customer(20)
     CONSTRAINT fk_priceList_customer FOREIGN KEY (name_equipment) REFERENCES typEquipment(name)
+);
+-- يتألف من 9 أعمدة equipmentRqport هنا قمنا بإنشاء جدول جديد إسمه
+CREATE TABLE equipmenRaport (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_equipment INT,
+    seriel_number VARCHAR(20),
+    connection1 VARCHAR(15),
+    connection2 VARCHAR(15),
+    condition_connection1 VARCHAR(15),
+    condition_connection2 VARCHAR(15),	
+    coment VARCHAR(50),
+    raport_number(50),
+    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (connection1) REFERENCES connectionThread(name)
+    CONSTRAINT fk_EquipmentRaport FOREIGN KEY (connection2) REFERENCES connectionThread(name)
+    ONSTRAINT fk_EquipmentRaport FOREIGN KEY (id_equipment) REFERENCES equipment(id)
 );
 
  
