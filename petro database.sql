@@ -49,7 +49,7 @@ CREATE TABLE job (
     CONSTRAINT fk_job_customer FOREIGN KEY (customer_name) REFERENCES customer(name)
 );
 -- يتألف ن 5 أعمدة connection هنا قمنا بإنشاء جدول جديد إسمه
-CREATE TABLE connectionthread (
+CREATE TABLE connection (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(15),
     size VARCHAR(5),
@@ -62,10 +62,10 @@ CREATE TABLE typeequipment (
     id INT NOT NULL UNIQUE AUTO_INCREMENT,
     name VARCHAR(15) PRIMARY KEY ,
     label2 VARCHAR(5),
-    Connection_thread VARCHAR(15),
+    Connection VARCHAR(15),
     grad VARCHAR(20),
     -- INDEX(name),
-    CONSTRAINT fk_typeEquipment_connectionThread FOREIGN KEY (connection_thread) REFERENCES connectionthread(name)
+    CONSTRAINT fk_typeEquipment_connectionThread FOREIGN KEY (connection) REFERENCES connection(name)
 );
 -- يتألف من 6 أعمدة Equipment هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE equipment (
@@ -82,7 +82,7 @@ CREATE TABLE equipment (
 
 );
 
--- يتألف من 9 أعمدة serviceEquipment هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 8 أعمدة serviceEquipment هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE serviceEquipment (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_equipment INT,
@@ -95,7 +95,7 @@ CREATE TABLE serviceEquipment (
     price DECIMAL(6,2),
     CONSTRAINT fk_serviceEquipment_equipmmment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
  );
--- يتألف من 5 أعمدة redresService هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 6 أعمدة redresService هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE redresService (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_service INT,
@@ -104,7 +104,7 @@ CREATE TABLE redresService (
     witheBluedUp boolean,
     CONSTRAINT fk_redresService_serviceEquipment FOREIGN KEY (id_service) REFERENCES serviceEquipment(id)
 );
--- يتألف من 4 أعمدة recutService هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 6 أعمدة recutService هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE recutService (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_service INT,
@@ -112,7 +112,7 @@ CREATE TABLE recutService (
     opetion VARCHAR(10),
     CONSTRAINT fk_recutService_serviceEquipment FOREIGN KEY (id_service) REFERENCES serviceEquipment(id)
 );
--- يتألف من 11 عمود priceList هنا قمنا بإنشاء جدول جديد إسمه
+-- يتألف من 11 أعمدة priceList هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE priceList (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     customer VARCHAR(20),
@@ -141,9 +141,24 @@ CREATE TABLE equipmenRaport (
     coment VARCHAR(50),
     raport_number VARCHAR(50),
     
-    CONSTRAINT fk_EquipmentRaport_connectionthread_1 FOREIGN KEY (connection1) REFERENCES connectionthread(name),
-    CONSTRAINT fk_EquipmentRaport_connectionthread_2 FOREIGN KEY (connection2) REFERENCES connectionthread(name),
+    CONSTRAINT fk_EquipmentRaport_connection_1 FOREIGN KEY (connection1) REFERENCES connection(name),
+    CONSTRAINT fk_EquipmentRaport_connection_2 FOREIGN KEY (connection2) REFERENCES connection(name),
     CONSTRAINT fk_EquipmentRaport_equipment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
+);
+
+CREATE TABLE dp_hwdp_equipmen_raport (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_equipment_report INT,
+    hardpanding VARCHAR(10),
+    bent boolean,
+    CONSTRAINT fk_dp_hwdp_equipmenRaport_Equipmentreport FOREIGN KEY (id_equipment_report) REFERENCES equipmenraport(id)
+);
+CREATE TABLE stablzer_equipmen_raport (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_equipment_report INT,
+    blade_condetion VARCHAR(10),
+    
+    CONSTRAINT fk_stablzer_equipmen_raport_Equipmentreport FOREIGN KEY (id_equipment_report) REFERENCES equipmenraport(id)
 );
 
  
