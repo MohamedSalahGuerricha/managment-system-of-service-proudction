@@ -1,0 +1,82 @@
+package test;
+
+public class Customer {
+	
+		  private int  id;                   // INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		    private String full_name;        // VARCHAR(50),
+		    private String name ;            // VARCHAR(20),
+		    private String adreess ;          //VARCHAR(50),
+		    private String NIF ;              //VARCHAR(15),
+		    private String TIN ;              //VARCHAR(15),
+		    private String BP ;               //VARCHAR(15),
+		    //INDEX(name)
+		    
+		    public Customer(int id, String full_name, String name, String adreess, String nIF, String tIN, String bP) {
+				this.id = id;
+				this.full_name = full_name;
+				this.name = name;
+				this.adreess = adreess;
+				NIF = nIF;
+				TIN = tIN;
+				BP = bP;
+			}
+		    
+		    public Customer( String full_name, String name, String adreess, String nIF, String tIN, String bP) {
+				this.full_name = full_name;
+				this.name = name;
+				this.adreess = adreess;
+				NIF = nIF;
+				TIN = tIN;
+				BP = bP;
+			}
+		    
+		    
+		    
+			public int getId() {
+				return id;
+			}
+			
+			public void setId(int id) {
+				this.id = id;
+			}
+			public String getFull_name() {
+				return full_name;
+			}
+			public void setFull_name(String full_name) {
+				this.full_name = full_name;
+			}
+			public String getName() {
+				return name;
+			}
+			public void setName(String name) {
+				this.name = name;
+			}
+			public String getAdreess() {
+				return adreess;
+			}
+			public void setAdreess(String adreess) {
+				this.adreess = adreess;
+			}
+			public String getNIF() {
+				return NIF;
+			}
+			public void setNIF(String nIF) {
+				NIF = nIF;
+			}
+			public String getTIN() {
+				return TIN;
+			}
+			public void setTIN(String tIN) {
+				TIN = tIN;
+			}
+			public String getBP() {
+				return BP;
+			}
+			public void setBP(String bP) {
+				BP = bP;
+			}
+
+		    
+		    
+		    
+}
