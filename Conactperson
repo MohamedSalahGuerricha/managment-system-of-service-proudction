@@ -1,0 +1,72 @@
+package test;
+
+public class Conactperson {
+
+
+		    private int id;// INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+		    private String customer_name ;//VARCHAR(20),
+		    private String first_name ;//VARCHAR(20),
+		    private String last_name ;//VARCHAR(20),
+		    private String phone ;//VARCHAR(20),
+		    private String Email ;//VARCHAR(255),
+		    //CONSTRAINT fk_contactPerson_customer FOREIGN KEY (customer_name) REFERENCES customer(name)
+		    
+		    public Conactperson(int id, String customer_name, String first_name, String last_name, String phone,
+					String email) {
+				this.id = id;
+				this.customer_name = customer_name;
+				this.first_name = first_name;
+				this.last_name = last_name;
+				this.phone = phone;
+				Email = email;
+			}
+		    
+		    public Conactperson( String customer_name, String first_name, String last_name, String phone,String email) {
+				this.customer_name = customer_name;
+				this.first_name = first_name;
+				this.last_name = last_name;
+				this.phone = phone;
+				Email = email;
+			}
+		    
+		    
+			public int getId() {
+				return id;
+			}
+			
+			public void setId(int id) {
+				this.id = id;
+			}
+			public String getCustomer_name() {
+				return customer_name;
+			}
+			public void setCustomer_name(String customer_name) {
+				this.customer_name = customer_name;
+			}
+			public String getFirst_name() {
+				return first_name;
+			}
+			public void setFirst_name(String first_name) {
+				this.first_name = first_name;
+			}
+			public String getLast_name() {
+				return last_name;
+			}
+			public void setLast_name(String last_name) {
+				this.last_name = last_name;
+			}
+			public String getPhone() {
+				return phone;
+			}
+			public void setPhone(String phone) {
+				this.phone = phone;
+			}
+			public String getEmail() {
+				return Email;
+			}
+			public void setEmail(String email) {
+				Email = email;
+			}
+
+
+}
