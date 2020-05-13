@@ -38,14 +38,17 @@ CREATE TABLE driver (
 );
 -- يتألف من 8 أعمده JOB هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE job (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     job_number VARCHAR(6) NOT NULL PRIMARY KEY ,
-    customer_name VARCHAR(255),
+    customer_name VARCHAR(20),
     PO VARCHAR(20),
     WO VARCHAR(20),
     date_open DATE,
     following VARCHAR(10),
     date_close DATE,
     price DECIMAL(6,2),
+        INDEX(PO)
+
     CONSTRAINT fk_job_customer FOREIGN KEY (customer_name) REFERENCES customer(name)
 );
 -- يتألف ن 5 أعمدة connection هنا قمنا بإنشاء جدول جديد إسمه
@@ -114,9 +117,9 @@ CREATE TABLE recutService (
 );
 -- يتألف من 11 أعمدة priceList هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE priceList (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT NOT NULL  ,
     customer VARCHAR(20),
-    cod_service VARCHAR(15),
+    cod_service VARCHAR(15) ,
     name_equipment VARCHAR(15),
     serivce VARCHAR(10),
     type VARCHAR(10),
@@ -125,13 +128,13 @@ CREATE TABLE priceList (
     option_price DECIMAL(6,2),
     unit_price DECIMAL(6,2),
     contract_price DECIMAL(6,2),
-    
+    PRIMARY KEY(customer,cod_service),
     CONSTRAINT fk_priceList_customer FOREIGN KEY (customer) REFERENCES customer(name),
     CONSTRAINT fk_priceList_typeequipment FOREIGN KEY (name_equipment) REFERENCES typeequipment(name)
 );
 -- يتألف من 9 أعمدة equipmentRqport هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE equipmenRaport (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id INT NOT NULL PRIMARY KEY,
     id_equipment INT,
     seriel_number VARCHAR(20),
     connection1 VARCHAR(15),
@@ -140,7 +143,6 @@ CREATE TABLE equipmenRaport (
     condition_connection2 VARCHAR(15),	
     coment VARCHAR(50),
     raport_number VARCHAR(50),
-    
     CONSTRAINT fk_EquipmentRaport_connection_1 FOREIGN KEY (connection1) REFERENCES connection(name),
     CONSTRAINT fk_EquipmentRaport_connection_2 FOREIGN KEY (connection2) REFERENCES connection(name),
     CONSTRAINT fk_EquipmentRaport_equipment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
