@@ -38,8 +38,8 @@ CREATE TABLE driver (
 );
 -- يتألف من 8 أعمده JOB هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE job (
-    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    job_number VARCHAR(6) NOT NULL PRIMARY KEY ,
+    id INT ,
+    job_number VARCHAR(6) NOT NULL UNIQUE  ,
     customer_name VARCHAR(20),
     PO VARCHAR(20),
     WO VARCHAR(20),
@@ -47,8 +47,8 @@ CREATE TABLE job (
     following VARCHAR(10),
     date_close DATE,
     price DECIMAL(6,2),
-        INDEX(PO)
-
+        INDEX(PO),
+CONSTRAINT pk_job PRIMARY KEY (`id`,`job_number`),
     CONSTRAINT fk_job_customer FOREIGN KEY (customer_name) REFERENCES customer(name)
 );
 -- يتألف ن 5 أعمدة connection هنا قمنا بإنشاء جدول جديد إسمه
