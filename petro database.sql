@@ -63,7 +63,7 @@ CREATE TABLE connection (
 -- يتألف ن 5 أعمدة typEquipment هنا قمنا بإنشاء جدول جديد إسمه
 CREATE TABLE typeequipment (
     id INT NOT NULL UNIQUE AUTO_INCREMENT,
-    name VARCHAR(15) PRIMARY KEY ,
+    name VARCHAR(15) PRIMARY KEY,
     label2 VARCHAR(5),
     Connection VARCHAR(15),
     grad VARCHAR(20),
@@ -161,6 +161,13 @@ CREATE TABLE stablzer_equipmen_raport (
     blade_condetion VARCHAR(10),
     
     CONSTRAINT fk_stablzer_equipmen_raport_Equipmentreport FOREIGN KEY (id_equipment_report) REFERENCES equipmenraport(id)
+);
+
+CREATE TABLE Stemp (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(15),
+    image BLOB
+    
 );
 
  
