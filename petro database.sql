@@ -95,7 +95,7 @@ CREATE TABLE serviceEquipment (
     inspector VARCHAR(10),
     aid VARCHAR(10),
     date_operation DATE,
-    price DECIMAL(6,2),
+    price DECIMAL(8,2),
     CONSTRAINT fk_serviceEquipment_equipmmment FOREIGN KEY (id_equipment) REFERENCES equipment(id)
  );
 -- يتألف من 6 أعمدة redresService هنا قمنا بإنشاء جدول جديد إسمه
@@ -124,7 +124,7 @@ CREATE TABLE priceList (
     serivce VARCHAR(10),
     type VARCHAR(10),
     date_lastupdat DATE,
-    responsapl VARCHAR(10),
+    responsal VARCHAR(10),
     option_price DECIMAL(6,2),
     unit_price DECIMAL(6,2),
     contract_price DECIMAL(6,2),
@@ -151,11 +151,11 @@ CREATE TABLE equipmenRaport (
 CREATE TABLE dp_hwdp_equipmen_raport (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_equipment_report INT,
-    hardpanding VARCHAR(10),
+    hardbanding VARCHAR(10),
     bent boolean,
     CONSTRAINT fk_dp_hwdp_equipmenRaport_Equipmentreport FOREIGN KEY (id_equipment_report) REFERENCES equipmenraport(id)
 );
-CREATE TABLE stablzer_equipmen_raport (
+CREATE TABLE stabilizer_equipmen_raport (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_equipment_report INT,
     blade_condetion VARCHAR(10),
